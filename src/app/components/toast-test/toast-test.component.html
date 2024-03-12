@@ -1,0 +1,22 @@
+<p>toast-test works!</p>
+<p-toast #myToast>
+    <ng-template let-message pTemplate="headless" let-closeFn="closeFn" *ngIf="{
+        times: elementTimes$ | async
+    } as data">
+        <div (mouseenter)="delayToasts(message.id)" (mouseleave)="resumeToasts(message.id)" [id]="message.id">
+        <section class="flex p-3 gap-3 w-full bg-black-alpha-90 shadow-2" style="border-radius: 10px" 
+        >
+            <h2> id: {{message.id}} </h2>
+            <h4> time: {{   data.times?.get(message.id) ?? durationMS }}</h4>
+            <div class="flex flex-column gap-3 w-full">
+                <p class="m-0 font-semibold text-base text-white">{{ message.summary }}</p>
+                <p class="m-0 text-base text-700">{{ message.detail }}</p>
+                
+            </div>
+        </section>
+        </div>
+    </ng-template>
+</p-toast>
+<button (click)="showToast()">
+    <h2> label </h2>
+</button>
